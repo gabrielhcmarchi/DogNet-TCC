@@ -4,17 +4,18 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 using DogNet.Data;
-using DogNet.Services;
-using System.Globalization;
 using DogNet.Entities;
 using DogNet.Models;
+using DogNet.Services;
+using SendGrid.Helpers.Mail;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
 
 namespace DogNet
 {
@@ -27,10 +28,7 @@ namespace DogNet
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        [Obsolete]
         public void ConfigureServices(IServiceCollection services)
-
         {
             services.Configure<CookiePolicyOptions>(options =>
             {
@@ -81,41 +79,15 @@ namespace DogNet
 
             services.AddMvc();
 
-            string mySqlConnectionStr = Configuration.GetConnectionString("DogNetMvcContext");
-
-          
-
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
             services.AddDbContext<DogNetMvcContext>(options =>
-                    options.UseMySql(Configuration.GetConnectionString("DogNetMvcContext"), builder =>
-                        builder.MigrationsAssembly("DogNet")));
-
-
+                    options.UseSqlite(Configuration.GetConnectionString("DogNetMvcContext")));
 
             services.Configure<EmailConfiguration>(Configuration.GetSection("EmailConfiguration"));
             //services.AddSingleton<IEmailSender, EmailSender>();
             services.AddSingleton<IEmailSender, SendGridSender>();
-
-
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
-
-            
-            services.AddControllers();
-            services.AddMvc(options => options.EnableEndpointRouting = false);
-     
-
-           
-
-           
-           
-
         }
 
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        [Obsolete]
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseForwardedHeaders(new ForwardedHeadersOptions
             {
@@ -156,12 +128,6 @@ namespace DogNet
                 SupportedUICultures = new List<CultureInfo> { defaultCulture }
             };
             app.UseRequestLocalization(localizationOptions);
-
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
-            app.UseCookiePolicy();
-
-     
         }
     }
 }
