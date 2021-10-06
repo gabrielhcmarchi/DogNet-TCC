@@ -28,6 +28,14 @@ namespace DogNet.Models
             }
         }
 
+        public double ValorDoacao
+        {
+            get
+            {
+                return 5 + ValorUnitario ;
+            }
+        }
+
         [ForeignKey("IdPedido")]
         public Pedido Pedido { get; set; }
 
