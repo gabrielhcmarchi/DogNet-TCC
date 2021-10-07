@@ -3,14 +3,16 @@ using System;
 using DogNet.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DogNet.Migrations
 {
     [DbContext(typeof(DogNetMvcContext))]
-    partial class DogNetMvcContextModelSnapshot : ModelSnapshot
+    [Migration("20211007135259_Instuicoes")]
+    partial class Instuicoes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

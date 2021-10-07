@@ -13,6 +13,9 @@ namespace DogNet.Views
 {
     public class CarrinhoModel : PageModel
     {
+
+        public IList<Instituicoes> Instituicoes { get; set; }
+
         private DogNetMvcContext _context;
         private SignInManager<AppUser> _signInManager;
         private UserManager<AppUser> _userManager;

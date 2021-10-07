@@ -25,6 +25,15 @@
     <link href="~/Cork-Templete-Main/HTML/ltr/collapsible-light-menu/assets/css/components/custom-modal.css" rel="stylesheet" type="text/css">
     <!--  END CUSTOM STYLE FILE  -->
 
+    <style>
+        .btn-dark {
+            color: #fff;
+            background-color: #343a40;
+            border-color: #343a40;
+            font-size: 13px;
+        }
+    </style>
+
 </head>
 <body>
     <div class="card">
@@ -99,12 +108,12 @@
                 <h3>Seu Carrinho de Compras está vazio.</h3>
             }
         </div>
-
-        <div class="modal animated zoomInUp custo-zoomInUp show" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
+      
+        <div class="modal fade show" id="sitioDaDonaLucia" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Sitío da Dona Lúcia</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <svg> ... </svg>
                         </button>
@@ -130,7 +139,17 @@
 
                 @if (Model.Pedido?.ItensPedido?.Count > 0)
                 {
-                    <a asp-action="ClickDoacao" class="btn btn-sm btn-success pull-right" style="background-color: #0398c6;" data-toggle="modal" data-target="#exampleModal">Fazer doação</a>
+
+            <div class="btn-group" role="group">
+                <button id="btnGroupVerticalDrop2" type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style=" height: 32px;">
+                    Faça uma doação
+                </button>
+                <div class="dropdown-menu" aria-labelledby="btnGroupVerticalDrop2" style="will-change: transform;">
+                    <a class="dropdown-item" data-toggle="modal" data-target="#sitioDaDonaLucia">Sítio Dona Lúcia</a>
+                    <a class="dropdown-item" href="#">Associação Refúgio Animal</a>
+                    <a class="dropdown-item" href="#">@Html.DisplayNameFor(m => m.Instituicoes[0].Nome)</a>
+                </div>
+            </div>
 
                     <a asp-page="/ConfirmarPedido" class="btn btn-sm btn-success pull-right">Fechar Pedido</a>
                 }
