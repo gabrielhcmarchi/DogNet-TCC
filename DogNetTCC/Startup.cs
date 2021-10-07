@@ -47,7 +47,7 @@ namespace DogNet
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(3); //default = 3
                 options.Lockout.MaxFailedAccessAttempts = 3; //default = 5
                 options.SignIn.RequireConfirmedAccount = false; //default = false
-                options.SignIn.RequireConfirmedEmail = true; //default = false
+                options.SignIn.RequireConfirmedEmail = false; //default = false
                 options.SignIn.RequireConfirmedPhoneNumber = false; //default = false                
             }).AddEntityFrameworkStores<DogNetMvcContext>()
               .AddDefaultTokenProviders();
