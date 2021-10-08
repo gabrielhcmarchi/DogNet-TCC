@@ -27,13 +27,13 @@ namespace DogNet.Pages.Admin.InstuicoesCRUD
             this._roleManager = roleManager;
         }
 
-        public IList<Instituicoes> Instituicoes { get; set; }
+        public IList<Instituicoes> InstituicoesLista { get; set; }
 
         public async Task OnGetAsync()
         {
             EmailsAdmins = (await _userManager.GetUsersInRoleAsync("admin")).
                 Select(x => x.Email).ToList();
-            Instituicoes = await _context.Instituicoes.ToListAsync();
+            InstituicoesLista = await _context.Instituicoes.ToListAsync();
         }
 
         public async Task<IActionResult> OnPostDeleteAsync(int? id)
@@ -65,12 +65,12 @@ namespace DogNet.Pages.Admin.InstuicoesCRUD
                 return NotFound();
             }
 
-            var cliente = await _context.Instituicoes.FindAsync(id);
+            var inst = await _context.Instituicoes.FindAsync(id);
 
-            if (cliente != null)
+            if (inst != null)
             {
-                AppUser usuario = await _userManager.FindByNameAsync(cliente.Email);
-                if (usuario != null)
+                AppUser usuario = await _userManager.FindByNameAsync(inst.Email);
+                if (inst != null)
                 {
                     await _userManager.RemoveFromRoleAsync(usuario, "admin");
                 }
@@ -86,11 +86,11 @@ namespace DogNet.Pages.Admin.InstuicoesCRUD
                 return NotFound();
             }
 
-            var cliente = await _context.Clientes.FindAsync(id);
+            var inst = await _context.Instituicoes.FindAsync(id);
 
-            if (cliente != null)
+            if (inst != null)
             {
-                AppUser usuario = await _userManager.FindByNameAsync(cliente.Email);
+                AppUser usuario = await _userManager.FindByNameAsync(inst.Email);
                 if (usuario != null)
                 {
                     if (!await _roleManager.RoleExistsAsync("admin"))

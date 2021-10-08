@@ -27,6 +27,8 @@ namespace DogNet.Views
         public Pedido Pedido { get; set; }
         public double TotalPedido { get; set; }
 
+        public IList<Instituicoes> InstituicoesLista { get; set; }
+
         public CarrinhoModel(DogNetMvcContext context,
             SignInManager<AppUser> signInManager,
             UserManager<AppUser> userManager)

@@ -49,15 +49,15 @@ namespace DogNet.Pages.Admin.InstuicoesCRUD
             //ModelState.ClearValidationState("Cliente.Email");
             //ModelState.ClearValidationState("Cliente.CPF");
 
-            if (ModelState.Keys.Contains("Cliente.Email"))
+            if (ModelState.Keys.Contains(" Institucoes.Email"))
             {
-                ModelState["Cliente.Email"].Errors.Clear();
-                ModelState.Remove("Cliente.Email");
+                ModelState["Institucoes.Email"].Errors.Clear();
+                ModelState.Remove("Institucoes.Email");
             }
-            if (ModelState.Keys.Contains("Cliente.CPF"))
+            if (ModelState.Keys.Contains("Institucoes.CPF"))
             {
-                ModelState["Cliente.CPF"].Errors.Clear();
-                ModelState.Remove("Cliente.CPF");
+                ModelState["Institucoes.CPF"].Errors.Clear();
+                ModelState.Remove("Institucoes.CPF");
             }
 
             if (!ModelState.IsValid)
@@ -74,7 +74,7 @@ namespace DogNet.Pages.Admin.InstuicoesCRUD
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ClienteExists(Instituicoes.IdInstituicoes))
+                if (!InstitucoesExists(Instituicoes.IdInstituicoes))
                 {
                     return NotFound();
                 }
@@ -87,7 +87,7 @@ namespace DogNet.Pages.Admin.InstuicoesCRUD
             return RedirectToPage("./Listar");
         }
 
-        private bool ClienteExists(int id)
+        private bool InstitucoesExists(int id)
         {
             return _context.Clientes.Any(e => e.IdCliente == id);
         }

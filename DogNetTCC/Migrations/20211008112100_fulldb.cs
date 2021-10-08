@@ -74,6 +74,32 @@ namespace DogNet.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Instituicoes",
+                columns: table => new
+                {
+                    IdInstituicoes = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Description = table.Column<string>(maxLength: 500, nullable: false),
+                    Nome = table.Column<string>(maxLength: 100, nullable: false),
+                    Pix = table.Column<string>(nullable: false),
+                    CNPJ = table.Column<string>(maxLength: 11, nullable: false),
+                    Telefone = table.Column<string>(maxLength: 11, nullable: false),
+                    Email = table.Column<string>(maxLength: 50, nullable: false),
+                    Endereco_Logradouro = table.Column<string>(maxLength: 100, nullable: true),
+                    Endereco_Numero = table.Column<string>(maxLength: 10, nullable: true),
+                    Endereco_Complemento = table.Column<string>(maxLength: 100, nullable: true),
+                    Endereco_Bairro = table.Column<string>(maxLength: 50, nullable: true),
+                    Endereco_Cidade = table.Column<string>(maxLength: 50, nullable: true),
+                    Endereco_Estado = table.Column<string>(maxLength: 2, nullable: true),
+                    Endereco_CEP = table.Column<string>(maxLength: 8, nullable: true),
+                    Endereco_Referencia = table.Column<string>(maxLength: 100, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Instituicoes", x => x.IdInstituicoes);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Produtos",
                 columns: table => new
                 {
@@ -316,6 +342,9 @@ namespace DogNet.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Instituicoes");
 
             migrationBuilder.DropTable(
                 name: "ItensPedido");

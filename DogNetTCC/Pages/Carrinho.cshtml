@@ -145,11 +145,14 @@
                     Faça uma doação
                 </button>
                 <div class="dropdown-menu" aria-labelledby="btnGroupVerticalDrop2" style="will-change: transform;">
-                    <a class="dropdown-item" data-toggle="modal" data-target="#sitioDaDonaLucia">Sítio Dona Lúcia</a>
-                    <a class="dropdown-item" href="#">Associação Refúgio Animal</a>
-                    <a class="dropdown-item" href="#">@Html.DisplayNameFor(m => m.Instituicoes[0].Nome)</a>
-                </div>
+                    @foreach (var item in Controllers.FrontSupport.ReturnInstituicoes())
+                    {
+                        @*<a class="dropdown-item" href="#">@Html.DisplayNameFor(m => m.Instituicoes[0].Nome)</a>*@
+                        <label>@item.Nome</label>
+                    }
+                    </div>
             </div>
+                    
 
                     <a asp-page="/ConfirmarPedido" class="btn btn-sm btn-success pull-right">Fechar Pedido</a>
                 }

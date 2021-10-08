@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DogNet.Migrations
 {
     [DbContext(typeof(DogNetMvcContext))]
-    [Migration("20211007135259_Instuicoes")]
-    partial class Instuicoes
+    [Migration("20211008112100_fulldb")]
+    partial class fulldb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

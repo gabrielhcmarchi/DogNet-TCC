@@ -21,7 +21,7 @@ namespace DogNet.Models
         public string Nome { get; set; }
 
         [Required(ErrorMessage = "O campo \"{0}\" é de preenchimento obrigatório.")]
-        [DisplayName("Data de Nascimento")]
+        [DisplayName("PIX")]
         public string Pix { get; set; }
 
         [Required(ErrorMessage = "O campo \"{0}\" é de preenchimento obrigatório.")]
