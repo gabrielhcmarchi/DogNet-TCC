@@ -1,5 +1,4 @@
 using System;
-using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -7,7 +6,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using DogNet.Data;
 using DogNet.Models;
-using DogNet.Services;
+
 
 namespace DogNet.Views
 {
@@ -15,7 +14,7 @@ namespace DogNet.Views
     public class FinalizarPedidoModel : PageModel
     {
         private DogNetMvcContext _context;
-        private IEmailSender _emailSender;
+
 
         public string COOKIE_NAME
         {
@@ -26,10 +25,10 @@ namespace DogNet.Views
 
         public Cliente Cliente { get; set; }
 
-        public FinalizarPedidoModel(DogNetMvcContext context, IEmailSender emailSender)
+        public FinalizarPedidoModel(DogNetMvcContext context)
         {
             _context = context;
-            _emailSender = emailSender;
+
         }
 
         public async Task<IActionResult> OnGetAsync()
@@ -53,7 +52,6 @@ namespace DogNet.Views
                     }
                     await _context.SaveChangesAsync();
                     Response.Cookies.Delete(COOKIE_NAME);
-                    await EnviarEmailResumoPedido();
                     return Page();
                 }
                 else
@@ -65,33 +63,7 @@ namespace DogNet.Views
             return RedirectToPage("/Carrinho");
         }
 
-        private async Task EnviarEmailResumoPedido()
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.Append($"<p>Olá, {Cliente.Nome}.<p>");
-            sb.Append($"<p>Recebemos seu pedido de compra número {Pedido.IdPedido.ToString("D6")}, no valor total de <b>{Pedido.ValorTotal.ToString("C")}</b>, conforme detalhamento a seguir:<p>");
-            sb.Append($"<table border='1'><tr><th>Produto</th><th>Qtde.</th><th>R$ Unit.</th><th>R$ Item</th></tr>");
-            foreach (var item in Pedido.ItensPedido)
-            {
-                sb.Append($"<tr><td>{item.Produto.Nome}</td><td>{item.Quantidade}</td><td>" +
-                    $"{item.ValorUnitario.ToString("F2")}</td><td>{item.ValorItem.ToString("F2")}</td></tr>");
-            }
-            sb.Append($"<tr><td colspan='3'>Valor Total</td><td>{Pedido.ValorTotal.ToString("C")}</td></tr></table>");
-            sb.Append($"<p>Em breve seus produtos serão entregues no endereço a seguir:</p>");
-            sb.Append($"<p>{Pedido.Endereco.Logradouro}, {Pedido.Endereco.Numero}, {Pedido.Endereco.Complemento}<br>" +
-                $"Bairro {Pedido.Endereco.Bairro}<br>{Pedido.Endereco.Cidade}/{Pedido.Endereco.Estado}<br>" +
-                $"CEP: {Pedido.Endereco.CEP.Insert(5, "-").Insert(2, ".")}</p>");
-            sb.Append($"<p>Agradecemos pela confiança em nosso trabalho!</p>");
-            sb.Append($"<p>Att.,<br>Equipe DogNet</p>");
-            try
-            {
-                await _emailSender.SendEmailAsync(Cliente.Email, $"Pedido {Pedido.IdPedido.ToString("D6")}",
-                    "", sb.ToString());
-            }
-            catch (Exception e)
-            {
-                ModelState.AddModelError("", $"Erro ao enviar e-mail: {e.Message}");
-            }
-        }
+
+
     }
 }

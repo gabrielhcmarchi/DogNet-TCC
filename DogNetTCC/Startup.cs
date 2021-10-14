@@ -1,4 +1,4 @@
-﻿ using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -9,10 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using DogNet.Data;
-using DogNet.Entities;
 using DogNet.Models;
-using DogNet.Services;
-using SendGrid.Helpers.Mail;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -82,9 +79,6 @@ namespace DogNet
             services.AddDbContext<DogNetMvcContext>(options =>
                     options.UseSqlite(Configuration.GetConnectionString("DogNetMvcContext")));
 
-            services.Configure<EmailConfiguration>(Configuration.GetSection("EmailConfiguration"));
-            //services.AddSingleton<IEmailSender, EmailSender>();
-            services.AddSingleton<IEmailSender, SendGridSender>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
