@@ -25,16 +25,13 @@ namespace DogNet.Models
         public string Pix { get; set; }
 
         [Required(ErrorMessage = "O campo \"{0}\" é de preenchimento obrigatório.")]
-        [RegularExpression(@"[0-9]{11}$", ErrorMessage = "O campo \"{0}\" deve ser preenchido com 11 dígitos numéricos.")]
-        [MaxLength(11, ErrorMessage = "O campo \"{0}\" deve conter no máximo {1} caracteres.")]
-        [MinLength(11, ErrorMessage = "O campo \"{0}\" deve conter no mínimo {1} caracteres.")]
-        [UIHint("_CpfTemplate")]
+        [MaxLength(14, ErrorMessage = "O campo \"{0}\" deve conter no máximo {1} caracteres.")]
+        [UIHint("_CnpjTemplate")]
         public string CNPJ { get; set; }
 
         [Required(ErrorMessage = "O campo \"{0}\" é de preenchimento obrigatório.")]
-        [RegularExpression(@"([0-9]){11}$", ErrorMessage = "O campo \"{0}\" deve ser preenchido com 11 dígitos numéricos.")]
         [MaxLength(11, ErrorMessage = "O campo \"{0}\" deve conter no máximo {1} caracteres.")]
-        [MinLength(11, ErrorMessage = "O campo \"{0}\" deve conter no mínimo {1} caracteres.")]
+        [MinLength(10, ErrorMessage = "O campo \"{0}\" deve conter no mínimo {1} caracteres.")]
         [UIHint("_TelefoneTemplate")]
         public string Telefone { get; set; }
 

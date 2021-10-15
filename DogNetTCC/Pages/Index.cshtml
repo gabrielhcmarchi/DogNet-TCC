@@ -74,7 +74,7 @@
                         {
                             <form class="d-inline-block" asp-page="/Carrinho" asp-page-handler="AddToCart"
                                   asp-route-id="@produto.IdProduto" method="post">
-                                <button type="submit" class="btn btn-danger">
+                                <button type="submit" class="btn btn-primary">
                                     Adicionar ao Carrinho
                                 </button>
                             </form>
@@ -82,7 +82,7 @@
                         }
                         else
                         {
-                            <div><button class="btn btn-light disabled" disabled><small>Aguardando Reabastecimento</small></button></div>
+                            <div><button class="btn btn-danger" disabled><small>Aguardando Reabastecimento</small></button></div>
                             <small class="text-danger"><b>Produto Esgotado</b></small>
                         }
                     </div>
