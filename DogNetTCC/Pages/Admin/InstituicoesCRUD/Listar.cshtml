@@ -48,26 +48,7 @@
                             </button>
                         </form>
 
-                        @if (Model.EmailsAdmins.Contains(item.Email))
-                        {
-                            <form class="d-inline-block" asp-page-handler="deladmin" asp-route-id="@item.IdInstituicoes" method="post">
-                                <button class="btn btn-warning btn-sm p-1" type="submit" data-toggle="tooltip" title="Transformar em Usuário Comum">
-                                    <svg class="bi" width="24" height="24" fill="currentColor" id="cep_none">
-                                        <use xlink:href="/bi.svg#person" />
-                                    </svg>
-                                </button>
-                            </form>
-                        }
-                        else
-                        {
-                            <form class="d-inline-block" asp-page-handler="setadmin" asp-route-id="@item.IdInstituicoes" method="post">
-                                <button class="btn btn-success btn-sm p-1" type="submit" data-toggle="tooltip" title="Transformar em Usuário Administrador">
-                                    <svg class="bi" width="24" height="24" fill="currentColor" id="cep_none">
-                                        <use xlink:href="/bi.svg#shield-lock" />
-                                    </svg>
-                                </button>
-                            </form>
-                        }
+                        
                     </td>
                 </tr>
                 }
