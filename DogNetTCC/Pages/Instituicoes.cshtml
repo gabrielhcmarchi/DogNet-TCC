@@ -11,13 +11,11 @@
     @if (true)
     {
         Models.Instituicoes vwInst = new Models.Instituicoes();
-        string nm = Controllers.FrontSupport.SelectReader();
         foreach (var item in Controllers.FrontSupport.ReturnInstituicoes())
         {
-            if ( == item.Nome)
+            if (vwInst.Nome == item.Nome)
             {
-                  <h1>@item.Nome</h1>
-                  <p>@item.Description</p>
+                <h1></h1>
             }
         }
 
