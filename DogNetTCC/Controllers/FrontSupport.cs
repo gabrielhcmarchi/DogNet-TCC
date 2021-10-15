@@ -34,29 +34,5 @@ namespace DogNet.Controllers
             return inst;
 
         }
-
-        public static string SelectReader(string rtn)
-        {
-
-            using var con = new SqliteConnection("Filename=./dados.db");
-            con.Open();
-            string stm = "SELECT * FROM Instituicoes";
-
-            using var cmd = new SqliteCommand(stm, con);
-            using SqliteDataReader rdr = cmd.ExecuteReader();
-
-            while (rdr.Read())
-            {
-                Instituicoes vwInst = new Instituicoes();
-                if(vwInst.Nome == rdr.GetString(0))
-                {
-                    rtn = rdr.GetString(0);
-                }
-            }
-
-            con.Close();
-            return rtn;
-
-        }
     }
 }
