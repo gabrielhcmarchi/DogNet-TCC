@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace DogNet.Data
 {
-    public class DogNetMvcContext : IdentityDbContext<AppUser>
+    public class DogNetMvcContext : DbContext
     {
         public DogNetMvcContext(DbContextOptions<DogNetMvcContext> options)
             : base(options)
@@ -18,6 +18,9 @@ namespace DogNet.Data
             base.OnModelCreating(modelBuilder);
             
             modelBuilder.Entity<ItemPedido>()
+                .HasKey(e => new { e.IdPedido, e.IdProduto });
+
+            modelBuilder.Entity<>()
                 .HasKey(e => new { e.IdPedido, e.IdProduto });
 
             //restringe a exclusão de clientes que possuem pedidos
