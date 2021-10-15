@@ -2,7 +2,6 @@
 using Microsoft.Data.Sqlite;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -26,9 +25,11 @@ namespace DogNet.Controllers
             List<Instituicoes> inst = new List<Instituicoes>();
 
             while (rdr.Read())
-            {      
-                vwInst.Nome =  rdr.GetString(1);
-                inst.Add(vwInst);
+            {
+               
+                    vwInst.Nome =  rdr.GetString(0);
+                    inst.Add(vwInst);
+                
             }
 
             con.Close();
