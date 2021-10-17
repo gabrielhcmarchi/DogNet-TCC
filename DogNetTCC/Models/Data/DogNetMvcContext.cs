@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace DogNet.Data
 {
-    public class DogNetMvcContext : DbContext
+    public class DogNetMvcContext : IdentityDbContext<AppUser>
     {
         public DogNetMvcContext(DbContextOptions<DogNetMvcContext> options)
             : base(options)
@@ -48,6 +48,6 @@ namespace DogNet.Data
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Pedido> Pedidos { get; set; }
         public DbSet<ItemPedido> ItensPedido { get; set; }
-        public object Instuicoes { get; internal set; }
+        
     }
 }

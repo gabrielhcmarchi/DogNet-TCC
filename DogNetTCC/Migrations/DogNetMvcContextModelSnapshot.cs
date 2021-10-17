@@ -14,7 +14,202 @@ namespace DogNet.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "5.0.11");
+                .HasAnnotation("ProductVersion", "3.1.7");
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+            {
+                b.Property<string>("Id")
+                    .HasColumnType("TEXT");
+
+                b.Property<string>("ConcurrencyStamp")
+                    .IsConcurrencyToken()
+                    .HasColumnType("TEXT");
+
+                b.Property<string>("Name")
+                    .HasColumnType("TEXT")
+                    .HasMaxLength(256);
+
+                b.Property<string>("NormalizedName")
+                    .HasColumnType("TEXT")
+                    .HasMaxLength(256);
+
+                b.HasKey("Id");
+
+                b.HasIndex("NormalizedName")
+                    .IsUnique()
+                    .HasName("RoleNameIndex");
+
+                b.ToTable("AspNetRoles");
+            });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("INTEGER");
+
+                b.Property<string>("ClaimType")
+                    .HasColumnType("TEXT");
+
+                b.Property<string>("ClaimValue")
+                    .HasColumnType("TEXT");
+
+                b.Property<string>("RoleId")
+                    .IsRequired()
+                    .HasColumnType("TEXT");
+
+                b.HasKey("Id");
+
+                b.HasIndex("RoleId");
+
+                b.ToTable("AspNetRoleClaims");
+            });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("INTEGER");
+
+                b.Property<string>("ClaimType")
+                    .HasColumnType("TEXT");
+
+                b.Property<string>("ClaimValue")
+                    .HasColumnType("TEXT");
+
+                b.Property<string>("UserId")
+                    .IsRequired()
+                    .HasColumnType("TEXT");
+
+                b.HasKey("Id");
+
+                b.HasIndex("UserId");
+
+                b.ToTable("AspNetUserClaims");
+            });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+            {
+                b.Property<string>("LoginProvider")
+                    .HasColumnType("TEXT");
+
+                b.Property<string>("ProviderKey")
+                    .HasColumnType("TEXT");
+
+                b.Property<string>("ProviderDisplayName")
+                    .HasColumnType("TEXT");
+
+                b.Property<string>("UserId")
+                    .IsRequired()
+                    .HasColumnType("TEXT");
+
+                b.HasKey("LoginProvider", "ProviderKey");
+
+                b.HasIndex("UserId");
+
+                b.ToTable("AspNetUserLogins");
+            });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+            {
+                b.Property<string>("UserId")
+                    .HasColumnType("TEXT");
+
+                b.Property<string>("RoleId")
+                    .HasColumnType("TEXT");
+
+                b.HasKey("UserId", "RoleId");
+
+                b.HasIndex("RoleId");
+
+                b.ToTable("AspNetUserRoles");
+            });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+            {
+                b.Property<string>("UserId")
+                    .HasColumnType("TEXT");
+
+                b.Property<string>("LoginProvider")
+                    .HasColumnType("TEXT");
+
+                b.Property<string>("Name")
+                    .HasColumnType("TEXT");
+
+                b.Property<string>("Value")
+                    .HasColumnType("TEXT");
+
+                b.HasKey("UserId", "LoginProvider", "Name");
+
+                b.ToTable("AspNetUserTokens");
+            });
+
+            modelBuilder.Entity("QuitandaOnline.Models.AppUser", b =>
+            {
+                b.Property<string>("Id")
+                    .HasColumnType("TEXT");
+
+                b.Property<int>("AccessFailedCount")
+                    .HasColumnType("INTEGER");
+
+                b.Property<string>("ConcurrencyStamp")
+                    .IsConcurrencyToken()
+                    .HasColumnType("TEXT");
+
+                b.Property<string>("Email")
+                    .HasColumnType("TEXT")
+                    .HasMaxLength(256);
+
+                b.Property<bool>("EmailConfirmed")
+                    .HasColumnType("INTEGER");
+
+                b.Property<bool>("LockoutEnabled")
+                    .HasColumnType("INTEGER");
+
+                b.Property<DateTimeOffset?>("LockoutEnd")
+                    .HasColumnType("TEXT");
+
+                b.Property<string>("Nome")
+                    .HasColumnType("TEXT");
+
+                b.Property<string>("NormalizedEmail")
+                    .HasColumnType("TEXT")
+                    .HasMaxLength(256);
+
+                b.Property<string>("NormalizedUserName")
+                    .HasColumnType("TEXT")
+                    .HasMaxLength(256);
+
+                b.Property<string>("PasswordHash")
+                    .HasColumnType("TEXT");
+
+                b.Property<string>("PhoneNumber")
+                    .HasColumnType("TEXT");
+
+                b.Property<bool>("PhoneNumberConfirmed")
+                    .HasColumnType("INTEGER");
+
+                b.Property<string>("SecurityStamp")
+                    .HasColumnType("TEXT");
+
+                b.Property<bool>("TwoFactorEnabled")
+                    .HasColumnType("INTEGER");
+
+                b.Property<string>("UserName")
+                    .HasColumnType("TEXT")
+                    .HasMaxLength(256);
+
+                b.HasKey("Id");
+
+                b.HasIndex("NormalizedEmail")
+                    .HasName("EmailIndex");
+
+                b.HasIndex("NormalizedUserName")
+                    .IsUnique()
+                    .HasName("UserNameIndex");
+
+                b.ToTable("AspNetUsers");
+            });
 
             modelBuilder.Entity("DogNet.Models.Cliente", b =>
                 {
@@ -24,29 +219,29 @@ namespace DogNet.Migrations
 
                     b.Property<string>("CPF")
                         .IsRequired()
-                        .HasMaxLength(11)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT")
+                        .HasMaxLength(11);
 
                     b.Property<DateTime>("DataNascimento")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT")
+                        .HasMaxLength(50);
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT")
+                        .HasMaxLength(100);
 
                     b.Property<int>("Situacao")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Telefone")
                         .IsRequired()
-                        .HasMaxLength(11)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT")
+                        .HasMaxLength(11);
 
                     b.HasKey("IdCliente");
 
@@ -61,23 +256,23 @@ namespace DogNet.Migrations
 
                     b.Property<string>("CNPJ")
                         .IsRequired()
-                        .HasMaxLength(14)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT")
+                        .HasMaxLength(14);
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT")
+                        .HasMaxLength(500);
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT")
+                        .HasMaxLength(50);
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT")
+                        .HasMaxLength(100);
 
                     b.Property<string>("Pix")
                         .IsRequired()
@@ -85,8 +280,8 @@ namespace DogNet.Migrations
 
                     b.Property<string>("Telefone")
                         .IsRequired()
-                        .HasMaxLength(11)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT")
+                        .HasMaxLength(11);
 
                     b.HasKey("IdInstituicoes");
 
@@ -150,8 +345,8 @@ namespace DogNet.Migrations
 
                     b.Property<string>("Descricao")
                         .IsRequired()
-                        .HasMaxLength(1000)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT")
+                        .HasMaxLength(1000);
 
                     b.Property<int?>("Estoque")
                         .IsRequired()
@@ -159,8 +354,8 @@ namespace DogNet.Migrations
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT")
+                        .HasMaxLength(100);
 
                     b.Property<double?>("Preco")
                         .IsRequired()
@@ -180,41 +375,41 @@ namespace DogNet.Migrations
 
                             b1.Property<string>("Bairro")
                                 .IsRequired()
-                                .HasMaxLength(50)
-                                .HasColumnType("TEXT");
+                                .HasColumnType("TEXT")
+                                .HasMaxLength(50);
 
                             b1.Property<string>("CEP")
                                 .IsRequired()
-                                .HasMaxLength(8)
-                                .HasColumnType("TEXT");
+                                .HasColumnType("TEXT")
+                                .HasMaxLength(8);
 
                             b1.Property<string>("Cidade")
                                 .IsRequired()
-                                .HasMaxLength(50)
-                                .HasColumnType("TEXT");
+                                .HasColumnType("TEXT")
+                                .HasMaxLength(50);
 
                             b1.Property<string>("Complemento")
-                                .HasMaxLength(100)
-                                .HasColumnType("TEXT");
+                                .HasColumnType("TEXT")
+                                .HasMaxLength(100);
 
                             b1.Property<string>("Estado")
                                 .IsRequired()
-                                .HasMaxLength(2)
-                                .HasColumnType("TEXT");
+                                .HasColumnType("TEXT")
+                                .HasMaxLength(2);
 
                             b1.Property<string>("Logradouro")
                                 .IsRequired()
-                                .HasMaxLength(100)
-                                .HasColumnType("TEXT");
+                                .HasColumnType("TEXT")
+                                .HasMaxLength(100);
 
                             b1.Property<string>("Numero")
                                 .IsRequired()
-                                .HasMaxLength(10)
-                                .HasColumnType("TEXT");
+                                .HasColumnType("TEXT")
+                                .HasMaxLength(10);
 
                             b1.Property<string>("Referencia")
-                                .HasMaxLength(100)
-                                .HasColumnType("TEXT");
+                                .HasColumnType("TEXT")
+                                .HasMaxLength(100);
 
                             b1.HasKey("ClienteIdCliente");
 
@@ -223,8 +418,6 @@ namespace DogNet.Migrations
                             b1.WithOwner()
                                 .HasForeignKey("ClienteIdCliente");
                         });
-
-                    b.Navigation("Endereco");
                 });
 
             modelBuilder.Entity("DogNet.Models.Instituicoes", b =>
@@ -236,41 +429,41 @@ namespace DogNet.Migrations
 
                             b1.Property<string>("Bairro")
                                 .IsRequired()
-                                .HasMaxLength(50)
-                                .HasColumnType("TEXT");
+                                .HasColumnType("TEXT")
+                                .HasMaxLength(50);
 
                             b1.Property<string>("CEP")
                                 .IsRequired()
-                                .HasMaxLength(8)
-                                .HasColumnType("TEXT");
+                                .HasColumnType("TEXT")
+                                .HasMaxLength(8);
 
                             b1.Property<string>("Cidade")
                                 .IsRequired()
-                                .HasMaxLength(50)
-                                .HasColumnType("TEXT");
+                                .HasColumnType("TEXT")
+                                .HasMaxLength(50);
 
                             b1.Property<string>("Complemento")
-                                .HasMaxLength(100)
-                                .HasColumnType("TEXT");
+                                .HasColumnType("TEXT")
+                                .HasMaxLength(100);
 
                             b1.Property<string>("Estado")
                                 .IsRequired()
-                                .HasMaxLength(2)
-                                .HasColumnType("TEXT");
+                                .HasColumnType("TEXT")
+                                .HasMaxLength(2);
 
                             b1.Property<string>("Logradouro")
                                 .IsRequired()
-                                .HasMaxLength(100)
-                                .HasColumnType("TEXT");
+                                .HasColumnType("TEXT")
+                                .HasMaxLength(100);
 
                             b1.Property<string>("Numero")
                                 .IsRequired()
-                                .HasMaxLength(10)
-                                .HasColumnType("TEXT");
+                                .HasColumnType("TEXT")
+                                .HasMaxLength(10);
 
                             b1.Property<string>("Referencia")
-                                .HasMaxLength(100)
-                                .HasColumnType("TEXT");
+                                .HasColumnType("TEXT")
+                                .HasMaxLength(100);
 
                             b1.HasKey("InstituicoesIdInstituicoes");
 
@@ -279,9 +472,6 @@ namespace DogNet.Migrations
                             b1.WithOwner()
                                 .HasForeignKey("InstituicoesIdInstituicoes");
                         });
-
-                    b.Navigation("Endereco")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("DogNet.Models.ItemPedido", b =>
@@ -297,10 +487,6 @@ namespace DogNet.Migrations
                         .HasForeignKey("IdProduto")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
-
-                    b.Navigation("Pedido");
-
-                    b.Navigation("Produto");
                 });
 
             modelBuilder.Entity("DogNet.Models.Pedido", b =>
@@ -317,41 +503,41 @@ namespace DogNet.Migrations
 
                             b1.Property<string>("Bairro")
                                 .IsRequired()
-                                .HasMaxLength(50)
-                                .HasColumnType("TEXT");
+                                .HasColumnType("TEXT")
+                                .HasMaxLength(50);
 
                             b1.Property<string>("CEP")
                                 .IsRequired()
-                                .HasMaxLength(8)
-                                .HasColumnType("TEXT");
+                                .HasColumnType("TEXT")
+                                .HasMaxLength(8);
 
                             b1.Property<string>("Cidade")
                                 .IsRequired()
-                                .HasMaxLength(50)
-                                .HasColumnType("TEXT");
+                                .HasColumnType("TEXT")
+                                .HasMaxLength(50);
 
                             b1.Property<string>("Complemento")
-                                .HasMaxLength(100)
-                                .HasColumnType("TEXT");
+                                .HasColumnType("TEXT")
+                                .HasMaxLength(100);
 
                             b1.Property<string>("Estado")
                                 .IsRequired()
-                                .HasMaxLength(2)
-                                .HasColumnType("TEXT");
+                                .HasColumnType("TEXT")
+                                .HasMaxLength(2);
 
                             b1.Property<string>("Logradouro")
                                 .IsRequired()
-                                .HasMaxLength(100)
-                                .HasColumnType("TEXT");
+                                .HasColumnType("TEXT")
+                                .HasMaxLength(100);
 
                             b1.Property<string>("Numero")
                                 .IsRequired()
-                                .HasMaxLength(10)
-                                .HasColumnType("TEXT");
+                                .HasColumnType("TEXT")
+                                .HasMaxLength(10);
 
                             b1.Property<string>("Referencia")
-                                .HasMaxLength(100)
-                                .HasColumnType("TEXT");
+                                .HasColumnType("TEXT")
+                                .HasMaxLength(100);
 
                             b1.HasKey("PedidoIdPedido");
 
@@ -360,20 +546,6 @@ namespace DogNet.Migrations
                             b1.WithOwner()
                                 .HasForeignKey("PedidoIdPedido");
                         });
-
-                    b.Navigation("Cliente");
-
-                    b.Navigation("Endereco");
-                });
-
-            modelBuilder.Entity("DogNet.Models.Cliente", b =>
-                {
-                    b.Navigation("Pedidos");
-                });
-
-            modelBuilder.Entity("DogNet.Models.Pedido", b =>
-                {
-                    b.Navigation("ItensPedido");
                 });
 #pragma warning restore 612, 618
         }
