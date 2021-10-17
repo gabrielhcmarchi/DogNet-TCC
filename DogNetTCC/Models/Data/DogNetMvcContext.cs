@@ -20,8 +20,6 @@ namespace DogNet.Data
             modelBuilder.Entity<ItemPedido>()
                 .HasKey(e => new { e.IdPedido, e.IdProduto });
 
-            modelBuilder.Entity<>()
-                .HasKey(e => new { e.IdPedido, e.IdProduto });
 
             //restringe a exclusão de clientes que possuem pedidos
             modelBuilder.Entity<Pedido>()

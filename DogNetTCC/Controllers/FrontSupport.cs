@@ -10,32 +10,7 @@ namespace DogNet.Controllers
 {
     public static class FrontSupport
     {
-
-        public static List<Models.Instituicoes> ReturnInstituicoes()
-        {
-
-            using var con = new SqliteConnection("Filename=./dados.db");
-            con.Open();
-            string stm = "SELECT Nome FROM Instituicoes";
-
-            using var cmd = new SqliteCommand(stm, con);
-            using SqliteDataReader rdr = cmd.ExecuteReader();
-
-            List<Instituicoes> inst = new List<Instituicoes>();
-
-            while (rdr.Read())
-            {
-                Instituicoes vwInst = new Instituicoes();
-                vwInst.Nome = rdr.GetString(0);
-                inst.Add(vwInst);
-            }
-
-            con.Close();
-            return inst;
-
-        }
-
-        public static string SelectReader(string rtn)
+        public static List<Models.Instituicoes> SelectInfoInst()
         {
 
             using var con = new SqliteConnection("Filename=./dados.db");
@@ -45,17 +20,20 @@ namespace DogNet.Controllers
             using var cmd = new SqliteCommand(stm, con);
             using SqliteDataReader rdr = cmd.ExecuteReader();
 
+            List<Instituicoes> inst = new List<Instituicoes>();
+
             while (rdr.Read())
             {
                 Instituicoes vwInst = new Instituicoes();
-                if(vwInst.Nome == rdr.GetString(0))
-                {
-                    rtn = rdr.GetString(0);
-                }
+                vwInst.Nome = rdr.GetString(2);
+                vwInst.Description = rdr.GetString(1);
+                vwInst.Telefone = rdr.GetString(5);
+                vwInst.Email = rdr.GetString(6);
+                inst.Add(vwInst);
             }
 
             con.Close();
-            return rtn;
+            return inst;
 
         }
     }

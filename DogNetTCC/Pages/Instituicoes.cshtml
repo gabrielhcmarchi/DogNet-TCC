@@ -11,11 +11,15 @@
     @if (true)
     {
         Models.Instituicoes vwInst = new Models.Instituicoes();
-        foreach (var item in Controllers.FrontSupport.ReturnInstituicoes())
+        foreach (var item in Controllers.FrontSupport.SelectInfoInst())
         {
-            if (vwInst.Nome == item.Nome)
+            if (vwInst.Nome != item.Nome)
             {
-                <h1></h1>
+                <h1>@item.Nome</h1>
+                <p>@item.Description</p>
+                <p> Numero : @item.Telefone</p>
+                <p>@item.Email</p>
+
             }
         }
 

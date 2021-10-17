@@ -150,7 +150,7 @@
                                 Faça uma doação
                             </button>
                             <div class="dropdown-menu" aria-labelledby="btnGroupVerticalDrop2" style="will-change: transform;">
-                                @foreach (var item in Controllers.FrontSupport.ReturnInstituicoes())
+                                @foreach (var item in Controllers.FrontSupport.SelectInfoInst())
                                 {
                                     @*<a class="dropdown-item" href="#">@Html.DisplayNameFor(m => m.Instituicoes[0].Nome)</a>*@
                                     <a class="dropdown-item" data-toggle="modal" data-target="#modalDoacao">@item.Nome</a>
