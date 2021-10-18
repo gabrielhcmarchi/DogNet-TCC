@@ -5,7 +5,12 @@
 
 <html>
 <head>
-
+    <style>
+        #Espaco {
+            position: relative;
+            padding: 33px;
+        }
+    </style>
 </head>
 <body>
     @if (true)
@@ -15,10 +20,11 @@
         {
             if (vwInst.Nome != item.Nome)
             {
-                <h1>@item.Nome</h1>
-                <p>@item.Description</p>
-                <p> Numero : @item.Telefone</p>
-                <p>@item.Email</p>
+                <div id="Espaco">
+                    <h1>@item.Nome</h1>
+                    <p>@item.Description</p>
+                    <p> Numero : @item.Telefone | Email : @item.Email</p>
+                </div>
 
             }
         }
