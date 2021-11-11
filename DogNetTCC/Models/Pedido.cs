@@ -43,6 +43,6 @@ namespace DogNet.Models
 
         public Endereco Endereco { get; set; }
 
-        public ICollection<ItemPedido> ItensPedido { get; set; }
+        public ICollection<ItemPedido> ItensPedido { get; set; } 
     }
 }

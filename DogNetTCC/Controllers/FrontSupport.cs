@@ -10,13 +10,12 @@ namespace DogNet.Controllers
 {
     public static class FrontSupport
     {
-
-        public static List<Models.Instituicoes> ReturnInstituicoes()
+        public static List<Models.Instituicoes> SelectInfoInst()
         {
 
             using var con = new SqliteConnection("Filename=./dados.db");
             con.Open();
-            string stm = "SELECT Nome FROM Instituicoes";
+            string stm = "SELECT * FROM Instituicoes";
 
             using var cmd = new SqliteCommand(stm, con);
             using SqliteDataReader rdr = cmd.ExecuteReader();
@@ -26,7 +25,10 @@ namespace DogNet.Controllers
             while (rdr.Read())
             {
                 Instituicoes vwInst = new Instituicoes();
-                vwInst.Nome = rdr.GetString(0);
+                vwInst.Nome = rdr.GetString(2);
+                vwInst.Description = rdr.GetString(1);
+                vwInst.Telefone = rdr.GetString(5);
+                vwInst.Email = rdr.GetString(6);
                 inst.Add(vwInst);
             }
 

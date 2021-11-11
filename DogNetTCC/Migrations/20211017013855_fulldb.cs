@@ -7,19 +7,20 @@ namespace DogNet.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+
             migrationBuilder.CreateTable(
-                name: "AspNetRoles",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    Name = table.Column<string>(maxLength: 256, nullable: true),
-                    NormalizedName = table.Column<string>(maxLength: 256, nullable: true),
-                    ConcurrencyStamp = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetRoles", x => x.Id);
-                });
+               name: "AspNetRoles",
+               columns: table => new
+               {
+                   Id = table.Column<string>(nullable: false),
+                   Name = table.Column<string>(maxLength: 256, nullable: true),
+                   NormalizedName = table.Column<string>(maxLength: 256, nullable: true),
+                   ConcurrencyStamp = table.Column<string>(nullable: true)
+               },
+               constraints: table =>
+               {
+                   table.PrimaryKey("PK_AspNetRoles", x => x.Id);
+               });
 
             migrationBuilder.CreateTable(
                 name: "AspNetUsers",
@@ -82,7 +83,7 @@ namespace DogNet.Migrations
                     Description = table.Column<string>(maxLength: 500, nullable: false),
                     Nome = table.Column<string>(maxLength: 100, nullable: false),
                     Pix = table.Column<string>(nullable: false),
-                    CNPJ = table.Column<string>(maxLength: 11, nullable: false),
+                    CNPJ = table.Column<string>(maxLength: 14, nullable: false),
                     Telefone = table.Column<string>(maxLength: 11, nullable: false),
                     Email = table.Column<string>(maxLength: 50, nullable: false),
                     Endereco_Logradouro = table.Column<string>(maxLength: 100, nullable: true),
@@ -116,25 +117,25 @@ namespace DogNet.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AspNetRoleClaims",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    RoleId = table.Column<string>(nullable: false),
-                    ClaimType = table.Column<string>(nullable: true),
-                    ClaimValue = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetRoleClaims", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
-                        column: x => x.RoleId,
-                        principalTable: "AspNetRoles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
+               name: "AspNetRoleClaims",
+               columns: table => new
+               {
+                   Id = table.Column<int>(nullable: false)
+                       .Annotation("Sqlite:Autoincrement", true),
+                   RoleId = table.Column<string>(nullable: false),
+                   ClaimType = table.Column<string>(nullable: true),
+                   ClaimValue = table.Column<string>(nullable: true)
+               },
+               constraints: table =>
+               {
+                   table.PrimaryKey("PK_AspNetRoleClaims", x => x.Id);
+                   table.ForeignKey(
+                       name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
+                       column: x => x.RoleId,
+                       principalTable: "AspNetRoles",
+                       principalColumn: "Id",
+                       onDelete: ReferentialAction.Cascade);
+               });
 
             migrationBuilder.CreateTable(
                 name: "AspNetUserClaims",
@@ -344,9 +345,6 @@ namespace DogNet.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Instituicoes");
-
-            migrationBuilder.DropTable(
                 name: "ItensPedido");
 
             migrationBuilder.DropTable(
@@ -354,6 +352,12 @@ namespace DogNet.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Instituicoes");
+
+            migrationBuilder.DropTable(
+                name: "ItensPedido");
 
             migrationBuilder.DropTable(
                 name: "Pedidos");
